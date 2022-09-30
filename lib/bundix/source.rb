@@ -95,7 +95,7 @@ class Bundix
       spec.source.caches.each do |cache|
         path = File.join(cache, "#{spec.full_name}.gem")
         next unless File.file?(path)
-        hash = nix_prefetch_url(path)[SHA256_32]
+        hash = nix_prefetch_url(path)&.dig(SHA256_32)
         return format_hash(hash) if hash
       end
 
